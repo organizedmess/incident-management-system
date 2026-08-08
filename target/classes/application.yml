@@ -3,9 +3,9 @@ spring:
     name: incident-management-system
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/incident_db
-    username: incident_user
-    password: incident_pass
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -67,3 +67,10 @@ notification:
     # Comma-separated list; Spring's relaxed binding converts this into List<String>
     # whether it comes from this default or an env var override.
     recipients: ${NOTIFICATION_EMAIL_RECIPIENTS:dhruvpahadia011@gmail.com}
+
+app:
+  kafka:
+    # When true (default, local dev): incidents flow through Kafka (KafkaLogProducer -> topic -> KafkaLogConsumer).
+    # When false (e.g. production without a Kafka broker): DirectIncidentLogProcessor handles
+    # persistence + vector-store indexing synchronously, and no Kafka beans are created.
+    enabled: ${KAFKA_ENABLED:true}

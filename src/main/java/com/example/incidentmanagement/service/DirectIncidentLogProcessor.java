@@ -7,25 +7,22 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.example.incidentmanagement.kafka.KafkaTopicConfig.INCIDENT_LOGS_TOPIC;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@ConditionalOnProperty(prefix = "app.kafka", name = "enabled", havingValue = "true", matchIfMissing = true)
-public class KafkaLogConsumer {
+@ConditionalOnProperty(prefix = "app.kafka", name = "enabled", havingValue = "false")
+public class DirectIncidentLogProcessor implements IncidentLogProcessor {
 
     private final IncidentLogRepository incidentLogRepository;
     private final VectorStore vectorStore;
 
-    @KafkaListener(topics = INCIDENT_LOGS_TOPIC, containerFactory = "incidentLogKafkaListenerContainerFactory")
-    public void consumeIncidentLog(IncidentLog incidentLog) {
+    @Override
+    public void process(IncidentLog incidentLog) {
         try {
             IncidentLog saved = incidentLogRepository.save(incidentLog);
             indexInVectorStore(saved);

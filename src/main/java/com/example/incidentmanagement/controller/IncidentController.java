@@ -3,7 +3,7 @@ package com.example.incidentmanagement.controller;
 import com.example.incidentmanagement.ai.ResolutionAgentService;
 import com.example.incidentmanagement.model.IncidentLog;
 import com.example.incidentmanagement.model.IncidentRequest;
-import com.example.incidentmanagement.service.KafkaLogProducer;
+import com.example.incidentmanagement.service.IncidentLogProcessor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class IncidentController {
 
-    private final KafkaLogProducer kafkaLogProducer;
+    private final IncidentLogProcessor incidentLogProcessor;
     private final ResolutionAgentService resolutionAgentService;
 
     @PostMapping
@@ -32,7 +32,7 @@ public class IncidentController {
                 .timestamp(LocalDateTime.now())
                 .build();
 
-        kafkaLogProducer.sendIncidentLog(incidentLog);
+        incidentLogProcessor.process(incidentLog);
 
         return ResponseEntity.accepted().build();
     }

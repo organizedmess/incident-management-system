@@ -48,6 +48,8 @@
 /Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/repository/IncidentLogRepository.java
 /Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/repository/IncidentRepository.java
 /Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/repository/package-info.java
+/Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/service/DirectIncidentLogProcessor.java
+/Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/service/IncidentLogProcessor.java
 /Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/service/IncidentService.java
 /Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/service/KafkaLogConsumer.java
 /Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/service/KafkaLogProducer.java
