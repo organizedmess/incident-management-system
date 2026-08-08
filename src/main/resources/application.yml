@@ -22,6 +22,18 @@ spring:
     consumer:
       group-id: incident-management-group
 
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
   ai:
     google:
       genai:
@@ -30,7 +42,10 @@ spring:
         api-key: ${GEMINI_API_KEY}
         chat:
           options:
-            model: gemini-2.5-flash
+            # gemini-2.5-flash is blocked by Google for newly-created API keys ahead of its
+            # official Oct 2026 retirement (confirmed via 404 "no longer available to new
+            # users"). gemini-3.6-flash is Google's current recommended stable fast/cheap model.
+            model: gemini-3.6-flash
         embedding:
           api-key: ${GEMINI_API_KEY}
           text:
@@ -46,3 +61,9 @@ spring:
         index-type: HNSW
         distance-type: COSINE_DISTANCE
         dimensions: 768
+
+notification:
+  email:
+    # Comma-separated list; Spring's relaxed binding converts this into List<String>
+    # whether it comes from this default or an env var override.
+    recipients: ${NOTIFICATION_EMAIL_RECIPIENTS:dhruvpahadia011@gmail.com}

@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,11 +32,10 @@ public class IncidentLog {
     @Column(nullable = false)
     private String serviceName;
 
-    @Lob
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String errorMessage;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String stackTrace;
 
     @Builder.Default
