@@ -1,4 +1,7 @@
 spring:
+  server:
+    port: ${PORT:8080}
+
   application:
     name: incident-management-system
 
@@ -66,7 +69,7 @@ notification:
   email:
     # Comma-separated list; Spring's relaxed binding converts this into List<String>
     # whether it comes from this default or an env var override.
-    recipients: ${NOTIFICATION_EMAIL_RECIPIENTS:dhruvpahadia011@gmail.com}
+    recipients: ${NOTIFICATION_EMAIL_RECIPIENTS}
 
 app:
   kafka:
