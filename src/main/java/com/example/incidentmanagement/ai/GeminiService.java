@@ -1,12 +1,14 @@
 package com.example.incidentmanagement.ai;
 
-import com.example.incidentmanagement.model.Severity;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
+
+import com.example.incidentmanagement.model.Severity;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Sole point of contact with Gemini for incident analysis. This class knows nothing about
@@ -60,8 +62,23 @@ public class GeminiService {
     // failure mode (API error, timeout, unparseable response) into one exception type so
     // callers only ever need to handle GeminiAnalysisException.
     @Recover
-    public GeminiAnalysisResult recover(Exception ex, String title, String description, Severity severity) {
-        log.warn("Gemini analysis failed for incident '{}' after all retries: {}", title, ex.getMessage());
-        throw new GeminiAnalysisException("Gemini analysis failed for incident: " + title, ex);
+    public GeminiAnalysisResult recover(
+            Exception ex,
+            String title,
+            String description,
+            Severity severity) {
+
+        log.error(
+            "GEMINI FAILURE for incident '{}'. Type: {}. Message: {}",
+            title,
+            ex.getClass().getName(),
+            ex.getMessage(),
+            ex
+        );
+
+        throw new GeminiAnalysisException(
+            "Gemini analysis failed for incident: " + title,
+            ex
+        );
     }
 }
