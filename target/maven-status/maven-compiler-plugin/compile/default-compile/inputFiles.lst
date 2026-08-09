@@ -10,6 +10,7 @@
 /Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/analytics/AnalyticsService.java
 /Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/analytics/package-info.java
 /Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/config/CorsConfig.java
+/Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/config/ResendConfig.java
 /Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/controller/IncidentController.java
 /Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/controller/IncidentManagementController.java
 /Users/dhruvpahadia/incident-management-system/src/main/java/com/example/incidentmanagement/controller/package-info.java

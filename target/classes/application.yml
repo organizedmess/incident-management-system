@@ -30,18 +30,6 @@ spring:
     consumer:
       group-id: incident-management-group
 
-  mail:
-    host: ${MAIL_HOST:smtp.gmail.com}
-    port: ${MAIL_PORT:587}
-    username: ${MAIL_USERNAME:}
-    password: ${MAIL_PASSWORD:}
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-
   ai:
     google:
       genai:
@@ -75,6 +63,12 @@ notification:
     # Comma-separated list; Spring's relaxed binding converts this into List<String>
     # whether it comes from this default or an env var override.
     recipients: ${NOTIFICATION_EMAIL_RECIPIENTS}
+
+resend:
+  # Resend's HTTPS API is used instead of SMTP because outbound SMTP (port 587) is
+  # blocked on Render's free tier -- see NotificationService for details.
+  api-key: ${RESEND_API_KEY}
+  from: ${RESEND_FROM_EMAIL:onboarding@resend.dev}
 
 app:
   kafka:
